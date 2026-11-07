@@ -1,7 +1,7 @@
 # Facebook scraper for Node.js and JavaScript
 
 [![Live check](https://github.com/brightdata/facebook-scraper-node/actions/workflows/live.yml/badge.svg)](https://github.com/brightdata/facebook-scraper-node/actions/workflows/live.yml)
-[![last verified](https://img.shields.io/badge/last%20verified-6%20Nov%202026-brightgreen)](https://github.com/brightdata/facebook-scraper-node/actions/workflows/live.yml) <!-- verified: rewritten by the daily run -->
+[![last check failed](https://img.shields.io/badge/last%20check%20failed-7%20Nov%202026-red)](https://github.com/brightdata/facebook-scraper-node/actions/workflows/live.yml) <!-- verified: rewritten by the daily run -->
 
 [Quickstart](#how-to-scrape-facebook-posts-with-nodejs) · [No login](#scrape-facebook-without-a-login-or-the-graph-api) · [CLI](#bulk-facebook-page-posts-cli) · [Endpoints](#scrape-facebook-posts-comments-marketplace-events-and-ads) · [Data](#facebook-post-data-fields-json) · [Errors](#facebook-scraper-errors) · [MCP and Claude Code](#facebook-mcp-server-and-claude-code-skill) · [Free credits](#is-this-facebook-scraper-free) · [Docs](https://docs.brightdata.com/products/scrapers/facebook/introduction) · [Support](#support)
 
