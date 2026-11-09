@@ -968,3 +968,11 @@ Anything about the API, your account or your credits:
 ## Facebook scraper for Python
 
 The same Facebook scraper is available for Python: [brightdata/facebook-scraper](https://github.com/brightdata/facebook-scraper).
+
+## More open source scrapers from Bright Data
+
+Other Node.js scrapers built the same way, with live-verified examples:
+
+- [Instagram scraper for Node.js](https://github.com/brightdata/instagram-scraper-node)
+- [TikTok scraper for Node.js](https://github.com/brightdata/tiktok-scraper-node)
+- [LinkedIn scraper for Node.js](https://github.com/brightdata/linkedin-scraper-node)
