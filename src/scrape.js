@@ -290,15 +290,50 @@ export function split(rows) {
   };
 }
 
+/**
+ * value parsed as a URL, when its host is domain or a subdomain of it.
+ * A substring test would let https://evil.com/facebook.com/x through; the host is
+ * what decides which site a URL names.
+ */
+function urlOn(value, domain) {
+  let url;
+  try {
+    url = new URL(value.includes("://") ? value : `https://${value}`);
+  } catch {
+    return null;
+  }
+  const host = url.hostname.toLowerCase();
+  return host === domain || host.endsWith(`.${domain}`) ? url : null;
+}
+
+/** value without leading and trailing ch, without a backtracking regex. */
+function trimChar(value, ch, { start = true, end = true } = {}) {
+  let from = 0;
+  let to = value.length;
+  while (start && from < to && value[from] === ch) from += 1;
+  while (end && to > from && value[to - 1] === ch) to -= 1;
+  return value.slice(from, to);
+}
+
+/** new URL() percent-encodes the path; keep a page name as it was typed. */
+function safeDecode(path) {
+  try {
+    return decodeURIComponent(path);
+  } catch {
+    return path;
+  }
+}
+
 /** Accept Meta, @Meta, facebook.com/Meta or a full URL. Reject anything else. */
 export function pageUrl(page) {
   const cleaned = String(page ?? "").trim();
-  if (cleaned.includes("facebook.com/")) {
-    const tail = cleaned.slice(cleaned.indexOf("facebook.com/") + "facebook.com/".length).replace(/^\/+|\/+$/g, "");
-    if (!tail) throw new Error(`${JSON.stringify(page)} is not a Facebook page`);
-    return `https://www.facebook.com/${tail}`;
+  if (trimChar(cleaned, "/").includes("/")) {
+    const url = urlOn(cleaned, "facebook.com");
+    const path = url ? trimChar(safeDecode(url.pathname), "/") : "";
+    if (!path) throw new Error(`${JSON.stringify(page)} is not a Facebook page`);
+    return `https://www.facebook.com/${path}${url.search}`;
   }
-  const name = cleaned.replace(/^@+/, "").replace(/^\/+|\/+$/g, "");
+  const name = trimChar(trimChar(cleaned, "@", { end: false }), "/");
   if (!/^[\p{L}\p{N}._-]+$/u.test(name)) throw new Error(`${JSON.stringify(page)} is not a Facebook page name`);
   return `https://www.facebook.com/${name}`;
 }

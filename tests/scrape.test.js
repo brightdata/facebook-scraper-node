@@ -361,3 +361,23 @@ describe("the README", () => {
     }
   });
 });
+
+describe("hosts", () => {
+  test("a URL on another host is not a page", () => {
+    assert.equal(pageUrl("https://m.facebook.com/Meta"), "https://www.facebook.com/Meta");
+    assert.equal(pageUrl("facebook.com/Café"), "https://www.facebook.com/Café");
+    for (const url of [
+      "https://evil.com/facebook.com/Meta",
+      "https://facebook.com.evil.com/Meta",
+      "https://notfacebook.com/Meta",
+    ]) {
+      assert.throws(() => pageUrl(url), /is not a Facebook page/, url);
+    }
+  });
+
+  test("a long run of slashes is cheap to reject", () => {
+    const started = Date.now();
+    assert.throws(() => pageUrl(`${"/".repeat(50_000)}x y`));
+    assert.ok(Date.now() - started < 500);
+  });
+});
