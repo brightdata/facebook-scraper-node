@@ -511,7 +511,7 @@ sample file's first post has 44 keys.
 </details>
 
 <details>
-<summary>All 44 group post fields, <code>gd_lz11l67o2cb3r0lkj3</code></summary>
+<summary>All 45 group post fields, <code>gd_lz11l67o2cb3r0lkj3</code></summary>
 
 | field | type | description |
 | --- | --- | --- |
@@ -559,6 +559,7 @@ sample file's first post has 44 keys.
 | `publisher_image_url` | url | Publisher image URL |
 | `num_reaction_type` | array | Type of likes received (e.g., reactions, thumbs-up) |
 | `delegate_page_id` | text | delegate_page_id |
+| `group_user_name` | text | Group user name |
 
 </details>
 
